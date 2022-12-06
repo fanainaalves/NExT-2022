@@ -1,0 +1,51 @@
+﻿/*criar o banco de dados*/
+create schema alunoProva;
+
+
+/*criar as tabelas*/
+CREATE TABLE aluno (
+  codigo int(11) NOT NULL PRIMARY KEY,
+  nome varchar(100) NOT NULL,
+  telefone varchar(100),
+  data_nascimento date);
+
+
+CREATE TABLE prova (
+  codigo int(11) NOT NULL PRIMARY KEY,
+  data_realizacao date,
+  descricao varchar(100));
+
+
+
+
+CREATE TABLE aluno_prova (
+  aluno_codigo int(11),
+  aluno_prova int(11),
+  nota decimal(10,2),
+  CONSTRAINT fk_aluno_codigo FOREIGN KEY (aluno_codigo) REFERENCES aluno (codigo),
+  CONSTRAINT fk_aluno_prova FOREIGN KEY (aluno_prova) REFERENCES prova (codigo));
+
+
+
+
+/*adicionar coluna idade na tabela aluno*/
+ALTER TABLE aluno ADD COLUMN idade integer;
+
+
+/*remover a coluna data de nascimento*/
+ALTER TABLE aluno DROP COLUMN data_nascimento;
+
+
+
+
+/*inserir nas tabelas*/
+INSERT INTO aluno VALUES (1,'Jorge','0000-1111','30');
+INSERT INTO aluno VALUES (2,'Carlos','4554-2232','21');
+
+
+/*atualizar a idade do aluno que tem o codigo 1*/
+UPDATE aluno SET idade = 40 where codigo = 1;
+
+
+/*deletar o aluno do codigo 2*/
+DELETE FROM aluno WHERE codigo = 2;
